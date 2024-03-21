@@ -1,6 +1,4 @@
-package servicios;
 import java.util.ArrayList;
-import servicios.Cliente;
 
 public class Canasta {
     private int id;
@@ -9,18 +7,19 @@ public class Canasta {
     private ArrayList<Canasta> lista = new ArrayList<>();
 
     public Canasta() {
-        this(0, null);
+        this(0, null, null);
     }
 
-    public Canasta(int id, Cliente cliente) {
+    public Canasta(int id, Cliente cliente, Producto producto) {
         this.id = id;
         this.cliente = cliente;
+        this.producto = producto;
     }
 
     public void agregarProducto(Producto producto) {
       /*Retornar lista de productos 
       con sus numeros para ver cual quiere agregar*/
-      lista.add(producto);
+      Canasta.lista.add(producto);
     }
 
     public String eliminarProducto(Producto producto) {
