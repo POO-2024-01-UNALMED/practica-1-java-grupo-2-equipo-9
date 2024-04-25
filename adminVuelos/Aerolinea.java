@@ -41,3 +41,65 @@ public class Aerolinea implements Serializable{
 		}
 		return retorno;
 	}
+
+	//BUSCAR VUELO POR...
+	
+	// RECIBE UNA LISTA DE VUELOS (ARRAYLIST<VUELO>) Y UN ID (INT) Y SE ENCARGA DE RETORNAR EL OBJETO VUELO QUE TENGA EL ID QUE PASAMOS 
+	// COMO PARAMETRO, SI NO LO ENCUENTRA EN ESA LISTA DE VUELOS RETORNA NULL.
+	public Vuelo buscarVueloPorID (ArrayList<Vuelo> vuelos, int ID)
+	{
+		for (int i = 0; i < vuelos.size(); i++)
+		{
+		  if (vuelos.get(i).getID() == ID )
+		  {
+			  return vuelos.get(i);
+		  }
+		}
+		return null;
+	}
+	
+	// RECIBE UNA LISTA DE VUELOS (ARRAYLIST<VUELO>) Y UN NOMBRE_AERONAVE(STRING) Y SE ENCARGA DE RETORNAR EL OBJETO VUELO QUE TENGA 
+	// ASOCIADA LA AERONAVE QUE TIENE EL NOMBRE QUE PASAMOS COMO PARAMETRO, SI NO LO ENCUENTRA EN ESA LISTA DE VUELOS RETORNA NULL.
+	public Vuelo buscarVueloPorAeronave (ArrayList<Vuelo> vuelos, String nombre_Aeronave)
+	{
+		for (int i = 0; i < vuelos.size(); i++)
+		{
+		  if (vuelos.get(i).getAeronave().getNombre().equals(nombre_Aeronave) )
+		  {
+			  return vuelos.get(i);
+		  }
+		}
+		return null;
+	}
+	
+	// RECIBE UNA LISTA DE VUELOS (ARRAYLIST<VUELO>) Y UN DESTINO(STRING) Y SE ENCARGA DE RETORNAR UNA LISTA DE VUELOS, 
+	// CON TODOS LOS VUELOS QUE TENGAN ASOCIADO EL DESTINO QUE PASAMOS COMO PARAMETRO.
+	public ArrayList<Vuelo> buscarVueloPorDestino (ArrayList<Vuelo> vuelos, String destino)
+	{
+		ArrayList<Vuelo> vuelosPorDestino = new ArrayList<Vuelo>();
+		for (int i = 0; i < vuelos.size(); i++)
+		{
+		  if (vuelos.get(i).getDestino().equalsIgnoreCase(destino)) // cambio del equals
+		  {
+			  vuelosPorDestino.add(vuelos.get(i));
+		  }
+		}
+		return vuelosPorDestino;
+	}
+
+	// RECIBE UNA LISTA DE VUELOS (ARRAYLIST<VUELO> ) Y UNA FECHA (STRING) Y SE ENCARGA DE RETORNAR UNA LISTA DE VUELOS, 
+	// CON TODOS LOS VUELOS QUE TENGAN ASOCIADA LA FECHA QUE PASAMOS COMO PARAMETRO.
+	public ArrayList<Vuelo> buscarVueloPorFecha (ArrayList<Vuelo> vuelos, String fecha)
+	{
+		ArrayList<Vuelo> vuelosPorFecha = new ArrayList<Vuelo>();
+		for (int i = 0; i < vuelos.size(); i++)
+		{
+		  if (vuelos.get(i).getFecha_de_salida().equals(fecha))
+		  {
+			  vuelosPorFecha.add(vuelos.get(i));
+		  }
+		}
+		return vuelosPorFecha;
+	}
+
+	//VUELOS DISPONIBLES
