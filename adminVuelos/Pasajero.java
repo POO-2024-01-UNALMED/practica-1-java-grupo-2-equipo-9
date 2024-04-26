@@ -19,3 +19,30 @@ public class Pasajero {
 	}
 
 	//GETTERS Y SETTERS
+
+	public String getPasaporte() {
+		return pasaporte;
+	}
+	public void setPasaporte(String pasaporte) {
+		this.pasaporte = pasaporte;
+	}
+	public Tiquete getTiquete() {
+		return tiquete;
+	}
+	public void setTiquete(Tiquete tiquete) {
+		this.tiquete = tiquete;
+	}
+	public int getEdad() {
+		return edad;
+	}
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+}
