@@ -26,7 +26,7 @@ public class Aerolinea implements Serializable{
 	//BUSCAR AEROLINEA
 	
 	// METODO DE CLASE QUE RECIBE UN NOMBRE DE AEROLINEA Y BUSCA ENTRE LAS AEROLINEAS DISPONIBLES SI HAY ALGUNA CON ESTE NOMBRE, 
-	//SI ES AS�, RETORNA ESE OBJETO AEROLINEA, SI NO, DEVUELVE NULL.
+	//SI ES ASI, RETORNA ESE OBJETO AEROLINEA, SI NO, DEVUELVE NULL.
 	public static Aerolinea buscarAerolineaPorNombre(String nombre2)
 	{
 		Aerolinea retorno = null;
