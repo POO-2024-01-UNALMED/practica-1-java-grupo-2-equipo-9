@@ -1,6 +1,5 @@
-package gestorAplicacion.hangar;
-import gestorAplicacion.adminVuelos.*;
-import java.io.Serializable;
+package hangar;
+
 public abstract class Aeronave implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -55,4 +54,61 @@ public abstract class Aeronave implements Serializable{
 		this.nombre = nombre;
 	}
 
+
+
+	// METODOS
+
+	public boolean isDescompuesto() {
+		return descompuesto;
+	}
+
+	public void setDescompuesto(boolean descompuesto) {
+		this.descompuesto = descompuesto;
+	}
+
+	public String toString() {
+		return this.nombre;
+	}
+
+	// BUSCAR SILLAS POR UBICACION Y TIPO
+//	EN ESTE METODO SE RECIBE UNA UBICACION(UBICACION) Y UN TIPO(STRING), LOS CUALES UTILIZA PARA BUSCAR DENTRO DE
+//	LAS LISTAS DE LA AERONAVE QUE LO LLAMA UNA SILLA CON LA UBICACION Y TIPO QUE SE INGRESAN.
+	public Silla buscarSillaPorUbicacionyTipo(Ubicacion ubicacion, String tipo) {
+
+		if (tipo.equalsIgnoreCase("ECONOMICA")) {
+			for (Silla i : SILLAS_ECONOMICAS) {
+				if (i.isEstado() & i.getUbicacion().equals(ubicacion)) {
+					return i;
+				}
+			}
+		} else if (tipo.equalsIgnoreCase("EJECUTIVA")) {
+			for (Silla i : SILLAS_EJECUTIVAS) {
+				if (i.isEstado() & i.getUbicacion().equals(ubicacion)) {
+					return i;
+				}
+			}
+		}
+		return null;
+	}
+	/*ESTE METODO RECORRAN LOS ARREGLOS DE SILLAS EJECUTIVOS Y ECONOMICAS DE CADA AVION Y AVIONETA 
+	PARA VERIFICAR LA CANTIDAD DE SILLAS QUE ESTAN OCUPADAS Y RETORNAR DICHA CANTIDAD*/
+
+	public String Calcular_Sillas_Ocupadas() {
+		int cont = 0;
+		for (Silla i : this.getSILLASECONOMICAS()) {
+			if (i.isEstado()) {
+				cont += 1;
+			}
+		}
+		for (Silla j : this.getSILLASEJECUTIVAS()) {
+			if (j.isEstado()) {
+				cont += 1;
+			}
+		}
+		return "Esta es la cantidad de silla ocupadas:"+cont;
+	}
+
+	/*ESTE METODO RECIBE UN TIPO DE DATO DOUBLE DE LA DISTANCIA QUE HAY DESDE EL LUGAR DE ORIGEN AL LUGAR DE DESTINO
+	Y RETONARNA EL COSTO TOTAL DE GASOLINA PARA RECORRER EL TRAYECTO*/
+	public abstract double Calcular_Consumo_Gasolina(double distancia_en_km);
 }

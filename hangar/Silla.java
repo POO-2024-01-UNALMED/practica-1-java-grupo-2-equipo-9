@@ -1,6 +1,5 @@
-package gestorAplicacion.hangar;
-import gestorAplicacion.adminVuelos.*;
-import java.io.Serializable;
+package hangar;
+
 public class Silla implements Serializable {
 
 	private Clase clase;
