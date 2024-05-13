@@ -103,3 +103,106 @@ public class Aerolinea implements Serializable{
 	}
 
 	//VUELOS DISPONIBLES
+	
+	// RECIBE UNA LISTA DE VUELOS (ARRAYLIST<VUELO>) Y SE ENCARGA DE RETORNAR UNA LISTA DE VUELOS, CON TODOS LOS VUELOS DE LA AEROLINEA
+	// QUE NO ESTEN COMPLETOS, ES DECIR QUE SU ATRIBUTO ESTACOMPLETO SEA IGUAL A false.
+	public ArrayList<Vuelo> vuelosDisponibles(ArrayList<Vuelo> vuelos)
+	{
+		ArrayList<Vuelo> vuelosDisponibles = new ArrayList<Vuelo>();
+		for (int i = 0; i < vuelos.size(); i++)
+		{
+			if (!vuelos.get(i).isEstaCompleto())
+			{
+				vuelosDisponibles.add(vuelos.get(i));
+			}
+		}
+		return vuelosDisponibles;
+	}
+
+	// AGREGAR O CANCELAR UN VUELO
+	
+	// RECIBE COMO PARAMETRO UN VUELO (VUELO) Y SE ENCARGA DE ANADIRLO A LA LISTA DE VUELOS DE LA AEROLINEA.
+	public void agregarVuelo(Vuelo vuelo)
+	{
+		vuelos.add(vuelo);
+	}
+
+	// RECIBE COMO PAR�METRO UN ENTERO, QUE CONTIENE EL ID DEL VUELO A ELIMINAR, Y SE ENCARGA DE RECORRER SU LISTA DE VUELOS PARA ELIMINAR 
+	// EL VUELO QUE CONTENGA EL ID QUE COINCIDE CON EL PARAMETRO, SI LO ENCONTRO Y LO ELIMINO, RETORNA true, EN CASO CONTRARIO RETORNA false.
+	public Boolean cancelarVuelo(int vuelo_a_eliminar)
+	{
+		for (int i = 0; i < vuelos.size(); i++)
+		{
+		  if (vuelos.get(i).getID() == vuelo_a_eliminar )
+		  {
+			  vuelos.remove(i);
+			  return true;
+		  }
+		}
+		return false;
+	}
+
+	// BUSCAR TIQUETE POR ID
+	
+	// METODO DE CLASE QUE RECIBE UN ID (INT) Y SE ENCARGA DE BUSCAR ENTRE CADA AEROL�NEA Y ENTRE CADA VUELO DE ESTA AEROLINEA, 
+	// SI HAY UN TIQUETE ASOCIADO EN LA LISTA DE TIQUETES DE CADA VUELO QUE TENGA POR ID EL QUE LE PASAMOS COMO PAR�METRO Y RETORNAR ESTE TIQUETE, 
+	// HACIENDO USO DEL METODO BUSCARTIQUETEPORID() DE VUELO.
+
+	public static Tiquete BuscarTiquete(int ID)
+	{
+		ArrayList<Aerolinea> aerolineasDisponibles = Aerolinea.getAerolineas();
+		for (int i = 0; i < aerolineasDisponibles.size(); i++)
+		{
+			Aerolinea aerolinea = aerolineasDisponibles.get(i);
+			for (int j = 0; j < aerolinea.getVuelos().size(); j++)
+			{
+
+				Vuelo vuelo = aerolinea.getVuelos().get(j);
+				Tiquete tiquete_buscado = vuelo.buscarTiquetePorID(vuelo.getTiquetes(), ID);
+				if (tiquete_buscado != null)
+				{
+					return tiquete_buscado;
+				}
+			}
+		}
+		return null;
+	}
+	  
+	// SETTERS Y GETTERS
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public ArrayList<Vuelo> getVuelos() {
+		return vuelos;
+	}
+
+
+	public void setVuelos(ArrayList<Vuelo> vuelos) {
+		this.vuelos = vuelos;
+	}
+
+	public ArrayList<Aeronave> getAeronaves() {
+		return aeronaves;
+	}
+
+	public void setAviones(ArrayList<Aeronave> aviones) {
+		this.aeronaves = aviones;
+	}
+
+	public static ArrayList<Aerolinea> getAerolineas() {
+		return aerolineas;
+	}
+
+	public static void setAerolineas(ArrayList<Aerolinea> aerolineas) {
+		Aerolinea.aerolineas = aerolineas;
+	}
+
+}
