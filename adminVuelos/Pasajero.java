@@ -1,6 +1,6 @@
-package adminVuelos;
-
-public class Pasajero {
+package gestorAplicacion.adminVuelos;
+import java.io.Serializable;
+public class Pasajero implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private String pasaporte;
@@ -44,5 +44,7 @@ public class Pasajero {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
 
 }
