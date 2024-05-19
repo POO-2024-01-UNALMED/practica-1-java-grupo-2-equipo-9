@@ -1,4 +1,6 @@
-package hangar;
+package gestorAplicacion.hangar;
+import gestorAplicacion.adminVuelos.*;
+import java.io.Serializable;
 
 public class Silla implements Serializable {
 
@@ -47,6 +49,5 @@ public class Silla implements Serializable {
 	public void setUbicacion(Ubicacion ubicacion) {
 		this.ubicacion = ubicacion;
 	}
-	
 	
 }

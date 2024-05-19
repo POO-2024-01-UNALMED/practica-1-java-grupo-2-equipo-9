@@ -1,4 +1,5 @@
-package hangar;
+package gestorAplicacion.hangar;
+
 public enum Clase {
 
 	ECONOMICA(10000),EJECUTIVA(70000);

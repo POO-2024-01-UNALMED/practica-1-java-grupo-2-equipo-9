@@ -1,4 +1,6 @@
-package hangar;
+package gestorAplicacion.hangar;
+import gestorAplicacion.adminVuelos.*;
+import java.io.Serializable;
 
 public abstract class Aeronave implements Serializable{
 
