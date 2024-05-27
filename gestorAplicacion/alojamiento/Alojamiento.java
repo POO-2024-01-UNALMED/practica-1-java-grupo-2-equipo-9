@@ -61,3 +61,50 @@ public class Alojamiento implements Serializable {
 	}
 
 	//GETTERS Y SETTERS
+
+		public void setLocacion(String locacion) {
+			this.locacion = locacion;
+		}
+
+		public void setPrecio_dias(long precio_dias) {
+			this.precio_dia = precio_dias;
+		}
+
+		public static ArrayList<Alojamiento> getAlojamientos() {
+			return alojamientos;
+		}
+
+		public static void setAlojamientos(ArrayList<Alojamiento> alojamientos) {
+			Alojamiento.alojamientos = alojamientos;
+		}
+
+		public long getPrecio_dia() {
+			return precio_dia;
+		}
+
+		public void setPrecio_dia(long precio_dia) {
+			this.precio_dia = precio_dia;
+		}
+
+		public String getLocacion() {
+			return locacion;
+		}
+
+		public int getEstrellas() {
+			return estrellas;
+		}
+
+		public void setEstrellas(int estrellas) {
+			this.estrellas = estrellas;
+		}
+
+		public String getNombre() {
+			return nombre;
+		}
+
+		public void setNombre(String nombre) {
+			this.nombre = nombre;
+		}
+
+	}
+
