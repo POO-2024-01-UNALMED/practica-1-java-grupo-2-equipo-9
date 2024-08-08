@@ -1,3 +1,4 @@
+// Autores: Ricardo Fuentes, Valery Fernandez, Juan Luis Sucerquia, Mariana Sanchez, José Forero
 //CLASE SERIALIZADOR QUE PERMITE LA PERSISTENCIA DE DATOS
 package baseDatos;
 
