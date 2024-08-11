@@ -1,3 +1,6 @@
+// Autores: Ricardo Fuentes, Valery Fernandez, Juan Luis Sucerquia, Mariana Sanchez, José Forero
+
+
 // CLASE AEROLINEA 
 package gestorAplicacion.adminVuelos;
 import java.io.Serializable;
