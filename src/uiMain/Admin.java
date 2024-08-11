@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 
+import gestorAplicacion.adminVuelos.Aerolinea;
+
 public class Admin {
 	static Scanner sc = new Scanner(System.in);
 	static GeneradorDeTablas generadorDeTablas = new TablasConsola();
@@ -52,5 +54,9 @@ public class Admin {
 					break;
 			}
 		} while (opcion != 6);
+	}
+	static void mostrarVuelosPorAerolineas() {
+		ArrayList<Aerolinea> aerolineasDisponibles = Aerolinea.getAerolineas();
+		generadorDeTablas.mostrarTablaDeVuelosDisponiblesPorAerolineas(aerolineasDisponibles);
 	}
 }
