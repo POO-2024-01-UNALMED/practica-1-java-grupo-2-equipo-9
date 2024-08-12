@@ -1,5 +1,8 @@
+// AUTORES: RICARDO FUENTES, VALERY FERNANDEZ, JUAN LUIS SUCERQUIA, MARIANA SANCHEZ, JOSE FORERO
 package gestorAplicacion.hangar;
 
-public class Ubicacion {
-    
+public enum Ubicacion {
+	
+	PASILLO,VENTANA,CENTRAL;
+
 }
