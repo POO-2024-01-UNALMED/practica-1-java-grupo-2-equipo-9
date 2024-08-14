@@ -1,5 +1,5 @@
 // INTERFACE PARA LA GENERACION DE TABLAS
-// AUTORES: JERONIMO SALAZAR, ALVARO GUERRERO, ESTEBAN ACOSTA, KAREN RIVERA
+
 package uiMain;
 import java.util.ArrayList;
 import gestorAplicacion.adminVuelos.*;
