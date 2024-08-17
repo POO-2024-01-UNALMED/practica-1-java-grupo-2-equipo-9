@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 
+import baseDatos.Serializador;
 import gestorAplicacion.adminVuelos.Aerolinea;
 import gestorAplicacion.adminVuelos.Pasajero;
 import gestorAplicacion.adminVuelos.Tiquete;
@@ -13,6 +14,7 @@ import gestorAplicacion.alojamiento.Alojamiento;
 import gestorAplicacion.hangar.Avion;
 import gestorAplicacion.hangar.Avioneta;
 import gestorAplicacion.hangar.Silla;
+import gestorAplicacion.hangar.Ubicacion;
 
 public class Admin {
 	static Scanner sc = new Scanner(System.in);
@@ -429,6 +431,222 @@ public class Admin {
 
 		}
 	}
+	public static void cancelarVuelos() {
+		System.out.println("Estos son los vuelos que tenemos:\n");
+		ArrayList<Aerolinea> aerolineas = Aerolinea.getAerolineas();
+		generadorDeTablas.mostrarTablaDeVuelosPorAerolineas(aerolineas);
+		System.out.println("Ingrese el ID del vuelo a eliminar:");
+		int id = sc.nextInt();
+
+		for (Aerolinea aerolinea : aerolineas) {
+			for (int i = 0; i < aerolinea.getVuelos().size(); i++) {
+				if (aerolinea.buscarVueloPorID(aerolinea.getVuelos(), id) != null) {
+					aerolinea.cancelarVuelo(id);
+					System.out.println("El vuelo se ha eliminado correctamente.");
+					return;
+				}
+			}
+		}
+		System.out.println("No tenemos un vuelo identificado con ese ID \n");
+	}
+
+	public static void retirarAvion() {
+		boolean aeronave_encontrada = false;
+		System.out.println("Ingrese el nombre de la Aeronave que se desea retirar:");
+		String nombre_aeronave = sc.next();
+		ArrayList<Aerolinea> aerolineasDisponibles = Aerolinea.getAerolineas();
+		for (int i = 0; i < aerolineasDisponibles.size(); i++) {
+			Aerolinea aerolinea = aerolineasDisponibles.get(i);
+			Vuelo vuelo = aerolinea.buscarVueloPorAeronave(aerolinea.getVuelos(), nombre_aeronave);
+			if (vuelo != null) {
+				vuelo.getAeronave().setDescompuesto(true);
+				aerolinea.cancelarVuelo(vuelo.getID());
+				System.out.println("Se ha retirado la aeronave descompuesta y el vuelo asociado a este.");
+				System.out.println();
+				aeronave_encontrada = true;
+				break;
+			}
+		}
+		if (!aeronave_encontrada) {
+			System.out.println("Lo sentimos, no encontramos una aeronave asociada al nombre que ingreso.");
+			System.out.println();
+		}
+	}
+	public static void nuevoAlojamiento()
+	{
+		System.out.println("Ingrese el nombre del alojamiento que desea agregar a nuestra lista:");
+		String nombre = sc.next();
+		System.out.println();
+		
+		System.out.println("Ingrese la locacion:");
+		String locacion = sc.next();
+		System.out.println();
+		
+		System.out.println("Ingrese el precio por dia:");
+		long precio = sc.nextLong();
+		System.out.println();
+		
+		System.out.println("Ingrese el numero de estrellas (1-5):");
+		int estrellas = sc.nextInt();
+		System.out.println();
+		
+		Alojamiento nuevoAlojamiento = new Alojamiento(nombre, locacion, precio, estrellas);
+		System.out.println("Perfecto! El alojamiento " + nuevoAlojamiento.getNombre() + " se ha agregado a nuestra lista.");
+		
+	}
+	
+	public static void retirarAlojamiento()
+	
+	{
+		System.out.println("Estos son los alojamientos que tenemos asociados:");
+		generadorDeTablas.mostrarTablaDeAlojamientos(Alojamiento.getAlojamientos());
+	
+		System.out.println("Ingrese el nombre del alojamiento que desea retirar de nuestra lista:");
+		String nombre = sc.next();
+		
+		if (Alojamiento.buscarAlojamientoPorNombre(nombre) != null)
+		{
+			for (int i = 0; i < Alojamiento.getAlojamientos().size(); i++ )
+			{
+				if (Alojamiento.getAlojamientos().get(i).getNombre().equalsIgnoreCase(nombre))
+				{
+					Alojamiento.getAlojamientos().remove(i);
+					System.out.println("El alojamiento " + nombre + " se ha eliminado correctamente.");
+					System.out.println();
+				}
+			}	
+		}
+		else
+		{
+			System.out.println("Lo sentimos, no tenemos un alojamiento con este nombre.");
+			System.out.println();
+		}
+	}
+	
+	private static void salirDelAdministrador() {
+		System.out.println("Gracias por usar nuestras opciones de administrador! \n");
+	}
+	
+	private static void salirDelSistema() {
+		System.out.println("Gracias por usar nuestro servicio!");
+		Serializador.serializar();
+		System.exit(0);
+	}
+	
+	static boolean consultarVuelosPorDestino(String destino) 
+	{
+		System.out.println("Estos son los vuelos disponibles hacia " + destino + " por nuestras aerolineas:" );
+		System.out.println();
+		boolean hayVuelos = false;
+		
+		ArrayList<Aerolinea> aerolineasDisponibles = Aerolinea.getAerolineas();
+		for (int i = 0; i < aerolineasDisponibles.size(); i++)
+		{
+			Aerolinea aerolinea = aerolineasDisponibles.get(i);
+			ArrayList<Vuelo> vuelosPorDestino = aerolinea.buscarVueloPorDestino(aerolinea.vuelosDisponibles(aerolinea.getVuelos()), destino);
+			if (vuelosPorDestino.size() != 0)
+			{
+				generadorDeTablas.mostrarTablaDeVuelos(aerolinea, vuelosPorDestino);
+				hayVuelos = true;	
+			}
+		}
+		if (hayVuelos == false) 
+		{
+		System.out.println("Lo sentimos, no tenemos vuelos disponibles para ese destino");
+		System.out.println();
+		}
+		return hayVuelos;
+	}
+	
+	static boolean consultarVuelosPorDestinoYFecha(String destino, String fecha) 
+	{
+		System.out.println();
+		System.out.println("Estos son los vuelos disponibles hacia " + destino + " en la fecha " + fecha + " por nuestras aerolineas:" );
+		System.out.println();
+		boolean hayVuelos = false;
+		
+		ArrayList<Aerolinea> aerolineasDisponibles = Aerolinea.getAerolineas();
+		for (int i = 0; i < aerolineasDisponibles.size(); i++)
+		{
+			Aerolinea aerolinea = aerolineasDisponibles.get(i);
+			ArrayList<Vuelo> vuelosPorDestino = aerolinea.buscarVueloPorDestino(aerolinea.vuelosDisponibles(aerolinea.getVuelos()), destino);
+			if (vuelosPorDestino.size() != 0)
+			{
+				ArrayList<Vuelo> vuelosPorFecha = aerolinea.buscarVueloPorFecha(vuelosPorDestino, fecha);
+				if(vuelosPorFecha.size() != 0 ){
+					generadorDeTablas.mostrarTablaDeVuelos(aerolinea, vuelosPorFecha);
+					hayVuelos = true;
+				}
+			}
+		}
+		if (hayVuelos == false) {
+			System.out.println("Lo sentimos, no tenemos vuelos disponibles para ese destino y fecha especificos");
+			System.out.println();
+		}
+		return hayVuelos;
+	}
+	
+	static boolean mostrarAlojamientosPorUbicacion(String ubicacion) 
+	{
+		System.out.println("Estos son los alojamientos disponibles en " + ubicacion + ":" );
+		boolean hayAlojamientos = false;
+		ArrayList<Alojamiento> alojamientosDisponibles = Alojamiento.buscarAlojamientoPorUbicacion(ubicacion);
+		if (alojamientosDisponibles.size() != 0) {
+			hayAlojamientos = true;
+			generadorDeTablas.mostrarTablaDeAlojamientos(alojamientosDisponibles);		
+		}else {
+			System.out.println("Lo sentimos, no tenemos alojamientos disponibles para ese destino");
+			System.out.println();
+		}
+		return hayAlojamientos;
+	}
+	
+		static Silla elegirSilla(Vuelo vuelo) 
+		{
+			System.out.println("1: Ejecutiva");
+			System.out.println("2: Economica");
+			
+			int nombre_clase = sc.nextInt();
+			int num_ubicacion;
+			String clase;
+			while(nombre_clase != 1 & nombre_clase!=2) {
+				System.out.println("Porfavor ingrese una opcion valida");
+				nombre_clase = sc.nextInt();
+			}
+			
+			System.out.println("Cual de las siguientes ubicaciones prefiere?");
+			System.out.println("1: Pasillo");
+			System.out.println("2: Ventana");
+			
+			if(nombre_clase == 2)  {
+				clase = "ECONOMICA";
+				System.out.println("3: Central");
+				num_ubicacion  = sc.nextInt();
+				while(num_ubicacion!=1 & num_ubicacion!=2 & num_ubicacion!=3) {
+					System.out.println("Porfavor ingrese una opcion valida");
+					num_ubicacion = sc.nextInt();
+				}
+			}
+			else {clase = "EJECUTIVA";
+				num_ubicacion  = sc.nextInt();
+				while(num_ubicacion!=1 & num_ubicacion!=2) {
+					System.out.println("Porfavor ingrese una opcion valida");
+					num_ubicacion = sc.nextInt();
+				}
+			}
+
+			Ubicacion ubicacion;
+			if(num_ubicacion == 1) {
+				ubicacion = Ubicacion.PASILLO;
+			}
+			else if (num_ubicacion == 2) {
+				ubicacion = Ubicacion.VENTANA;
+			}
+			else {ubicacion = Ubicacion.CENTRAL;
+			}
+			
+			return vuelo.getAeronave().buscarSillaPorUbicacionyTipo(ubicacion,clase );
+		}
 
 	
 }
