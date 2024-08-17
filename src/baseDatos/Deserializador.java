@@ -13,7 +13,7 @@ public class Deserializador {
     
     //LA CLASE File SE USA PARA EL MANEJO DE ARCHIVOS
     //File.separator SE USA PARA DIVIDIR LA RUTA A UN ARCHIVO ESPECIFICO DADO UN SISTEMA OPERATIVO
-    private static File rutaArchivosTemp = new File("src"+File.separator+"baseDatos"+File.separator+"temp");
+    private static File rutaArchivosTemp = new File("src"+File.separator+"basedatos"+File.separator+"temp");
 
     //SE DESERIALIZA LA LISTA DE ALOJAMIENTOS Y AEROLINEAS
     public static void deserializar(){
@@ -53,9 +53,9 @@ public class Deserializador {
                 //DESERIALIZAMOS UNA LISTA DE ALOJAMIENTOS
             }else if (file.getAbsolutePath().contains("Alojamientos")){
                 try {
-                    archivo = new FileInputStream(file);
-                    guardado = new ObjectInputStream(archivo);
-                    Alojamiento.setAlojamientos((ArrayList<Alojamiento>) guardado.readObject());
+                archivo = new FileInputStream(file);
+                guardado = new ObjectInputStream(archivo);
+                Alojamiento.setAlojamientos((ArrayList<Alojamiento>) guardado.readObject());
 
                 }catch(FileNotFoundException e){
                     e.printStackTrace();
