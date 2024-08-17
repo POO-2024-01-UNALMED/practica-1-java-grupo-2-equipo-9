@@ -4,17 +4,13 @@ package uiMain;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
-
+import baseDatos.Deserializador;
 import baseDatos.Serializador;
-import gestorAplicacion.adminVuelos.Aerolinea;
-import gestorAplicacion.adminVuelos.Pasajero;
-import gestorAplicacion.adminVuelos.Tiquete;
-import gestorAplicacion.adminVuelos.Vuelo;
+import gestorAplicacion.*;
 import gestorAplicacion.alojamiento.Alojamiento;
-import gestorAplicacion.hangar.Avion;
-import gestorAplicacion.hangar.Avioneta;
-import gestorAplicacion.hangar.Silla;
-import gestorAplicacion.hangar.Ubicacion;
+import gestorAplicacion.adminVuelos.*;
+import gestorAplicacion.hangar.*;
+import java.lang.Math;
 
 public class Admin {
 	static Scanner sc = new Scanner(System.in);

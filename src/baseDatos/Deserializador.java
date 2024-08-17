@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import gestorAplicacion.adminVuelos.Aerolinea;
 import gestorAplicacion.alojamiento.Alojamiento;
+import gestorAplicacion.hangar.*;
 
 
 //PARA CARGAR ARCHIVOS DESDE TEMP Y VER EL ESTADO DE LOS OBJETOS DEL SISTEMA

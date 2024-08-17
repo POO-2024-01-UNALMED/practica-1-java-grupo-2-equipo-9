@@ -42,7 +42,7 @@ public class Tiquete implements Serializable{
             this.precio = (int) (precio_total - (precio_total*0.15));
             hayDescuento = true;
         }else{
-            this.precio = precio_total
+            this.precio = precio_total;
         }
         return hayDescuento;
     }
