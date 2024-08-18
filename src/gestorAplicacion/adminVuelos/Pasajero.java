@@ -1,9 +1,5 @@
-// Autores: Ricardo Fuentes, Valery Fernandez, Juan Luis Sucerquia, Mariana Sanchez, José Forero
-
-
 package gestorAplicacion.adminVuelos;
 import java.io.Serializable;
-
 public class Pasajero implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
