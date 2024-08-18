@@ -32,7 +32,7 @@ public class Alojamiento implements Serializable {
 	// BUSCAR ALOJAMIENTOS POR...
 
 	// METODO DE CLASE QUE RECIBE UNA UBICACION(String) Y BUSCA ENTRE LAS ALOJAMIENTOS DISPONIBLES SI HAY ALGUNO EN ESTA LOCACION, 
-	//SI ES AS�, RETORNA ESE OBJETO ALOJAMIENTO, SI NO, DEVUELVE NULL.
+	//SI ES ASI, RETORNA ESE OBJETO ALOJAMIENTO, SI NO, DEVUELVE NULL.
 	public static ArrayList<Alojamiento> buscarAlojamientoPorUbicacion (String ubicacion) {
 		ArrayList<Alojamiento> alojamientosEnUbicacion = new ArrayList<Alojamiento>();
 		for (int i = 0; i < alojamientos.size(); i++)
@@ -46,7 +46,7 @@ public class Alojamiento implements Serializable {
 	}
 	
 	// METODO DE CLASE QUE RECIBE UNA NOBRE(String) Y BUSCA ENTRE LAS ALOJAMIENTOS DISPONIBLES SI HAY ALGUNO CON ESTE NOMBRE, 
-	//SI ES AS�, RETORNA ESE OBJETO ALOJAMIENTO, SI NO, DEVUELVE NULL.
+	//SI ES ASI, RETORNA ESE OBJETO ALOJAMIENTO, SI NO, DEVUELVE NULL.
 	public static Alojamiento buscarAlojamientoPorNombre(String nombre) {
 		for (int i = 0; i < alojamientos.size(); i++)
 		{

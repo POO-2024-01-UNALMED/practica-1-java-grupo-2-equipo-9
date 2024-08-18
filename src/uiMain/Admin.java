@@ -27,7 +27,7 @@ public class Admin {
 //		MENU PRINCIPAL
 		int opcion;
 		do {
-			System.out.println("---- SISTEMA DE RESERVAS DE VUELO ---");
+			System.out.println("----- AEROPUERTO EL SOL -----");
 			System.out.println("¿Que operacion desea realizar?");
 			System.out.println("1. Ver todos los vuelos disponibles por Aerolinea");
 			System.out.println("2. Comprar tiquete para un vuelo por destino y fecha");
@@ -308,7 +308,7 @@ public class Admin {
 		int opcion;
 		do {
 
-			System.out.println("Que opcion desea realizar como administrador?");
+			System.out.println("¿Que opcion desea realizar como administrador?");
 			System.out.println("1. Listar Pasajeros.");
 			System.out.println("2. Agregar Vuelo.");
 			System.out.println("3. Cancelar vuelo.");
@@ -354,7 +354,7 @@ public class Admin {
 	   MOSTRAR LAS LISTAS DE PASAJAEROS ASOCIADOS A UN VUELO. 
 	   PARA ESTO ACCEDEMOS A TRAVES DEL ID DEL VUELO E INVOCAMOS EL METODO BUSCAR VUELO POR ID.
 	   AL FINAL NOS MOSTRARA SI EL VUELO TIENE PASAJEROS ASOCIADOS O NO, Y LA INFORMACION ASOCIADA
-	   AL ID DEL TIQUETE DEL PASAJAERO, SU NOMBRE, SU PASARTE Y SU EMAIL. */
+	   AL ID DEL TIQUETE DEL PASAJERO, SU NOMBRE, SU PASAPORTE Y SU EMAIL. */
 	private static void listarPasajeros() {
 		ArrayList<Aerolinea> aerolineas = Aerolinea.getAerolineas();
 		generadorDeTablas.mostrarTablaDeVuelosPorAerolineas(aerolineas);
@@ -385,7 +385,7 @@ public class Admin {
 	}
 
 	// CASE 2: AGREGAR NUEVO VUELO A UNA AEROLINEA
-	/* ESTE METODO NO RECIBE PARAMETROS DE ENTRADA PORQUE SE LE PIDE AL USUARIO ADMINISTRADOR INGREGAR 
+	/* ESTE METODO NO RECIBE PARAMETROS DE ENTRADA PORQUE SE LE PIDE AL USUARIO ADMINISTRADOR INGRESAR 
 	   POR CONSOLA LOS DATOS NECESARIOS PARA AGREGAR UN NUEVO VUELO A UN AEROLINEA.
 	   PARA ESTO SE HARA UNA VERFICACION DE LA EXISTENCIA DE LA AEROLINEA Y POSTERIORMENTE SE RECIBIRAN LOS
 	   PARAMETROS NECESARIOS PARA INSTANCIAR UN VUELO Y AREGARLO AL ARREGLO DE VUELOS QUE LA AEROLINEA*/
@@ -677,8 +677,8 @@ public class Admin {
 	//METODOS AUXILIARES - ELEGIR SILLA
 	
 		//ESTE METODO RECIBE UN TIQUETE Y UN VUELO, ESTE ULTIMO LO UTILIZARA PARA ACCEDER A LAS SILLAS DEL AVION QUE REALIZARA EL VUELO.
-		//LUEGO SOLICITA QUE TIPO DE SILLA Y UBICACION PREFIERE, VALORES LOS CUALES USARA PARA BUSCAR  DENTRO DEL AVION SI SE ENCUENTRA UNA SILLA DISPONIBLE
-		//CON ESAS CARACTERISTICAS	Y ASIGANARLA AL ATRIBUTO SILLA DE TIQUETE.
+		//LUEGO SOLICITA QUE TIPO DE SILLA Y UBICACION PREFIERE, VALORES LOS CUALES USARA PARA BUSCAR DENTRO DEL AVION SI SE ENCUENTRA UNA SILLA DISPONIBLE
+		//CON ESAS CARACTERISTICAS	Y ASIGNARLA AL ATRIBUTO SILLA DE TIQUETE.
 			static Silla elegirSilla(Vuelo vuelo) 
 		{
 			System.out.println("1: Ejecutiva");
