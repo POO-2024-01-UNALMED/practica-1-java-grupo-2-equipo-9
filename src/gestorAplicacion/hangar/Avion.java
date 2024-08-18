@@ -1,7 +1,6 @@
-// Autores: Ricardo Fuentes, Valery Fernandez, Juan Luis Sucerquia, Mariana Sanchez, José Forero
-
-
+// AUTORES: RICARDO FUENTES, VALERY FERNANDEZ, JUAN LUIS SUCERQUIA, MARIANA SANCHEZ, JOSE FORERO
 package gestorAplicacion.hangar;
+
 import gestorAplicacion.adminVuelos.*;
 
 public class Avion extends Aeronave {

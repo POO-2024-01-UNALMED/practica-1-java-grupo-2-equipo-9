@@ -1,9 +1,6 @@
-// Autores: Ricardo Fuentes, Valery Fernandez, Juan Luis Sucerquia, Mariana Sanchez, José Forero
-
-
+// AUTORES: RICARDO FUENTES, VALERY FERNANDEZ, JUAN LUIS SUCERQUIA, MARIANA SANCHEZ, JOSE FORERO
 package gestorAplicacion.hangar;
 import gestorAplicacion.adminVuelos.*;
-
 import java.io.Serializable;
 public abstract class Aeronave implements Serializable{
 

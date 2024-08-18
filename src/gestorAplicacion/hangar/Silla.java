@@ -1,10 +1,7 @@
-
-
-
+// AUTORES: RICARDO FUENTES, VALERY FERNANDEZ, JUAN LUIS SUCERQUIA, MARIANA SANCHEZ, JOSE FORERO
 package gestorAplicacion.hangar;
 import gestorAplicacion.adminVuelos.*;
 import java.io.Serializable;
-
 public class Silla implements Serializable {
 
 	private Clase clase;
@@ -20,7 +17,7 @@ public class Silla implements Serializable {
 		this.ubicacion = ubicacion;
 	}
 	
-
+	//GETTERS Y SETTERS
 
 	public Clase getClase() {
 		return clase;

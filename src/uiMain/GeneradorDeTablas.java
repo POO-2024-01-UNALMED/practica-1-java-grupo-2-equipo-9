@@ -1,5 +1,5 @@
 // INTERFACE PARA LA GENERACION DE TABLAS
-
+// AUTORES: RICARDO FUENTES, VALERY FERNANDEZ, JUAN LUIS SUCERQUIA, MARIANA SANCHEZ, JOSE FORERO
 package uiMain;
 import java.util.ArrayList;
 import gestorAplicacion.adminVuelos.*;

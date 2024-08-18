@@ -1,5 +1,7 @@
 //CLASE PARA LA IMPRESION POR PANTALLA DE TABLAS DE DATOS
+//AUTORES: RICARDO FUENTES, VALERY FERNANDEZ, JUAN LUIS SUCERQUIA, MARIANA SANCHEZ, JOSE FORERO
 package uiMain;
+
 import java.util.ArrayList;
 
 import gestorAplicacion.alojamiento.Alojamiento;
@@ -132,5 +134,12 @@ public class TablasConsola implements GeneradorDeTablas {
 		System.out.println("--------------------------------------------------------------------------------------------------");  
 		System.out.println();	
 	}
+
+
+
+
+
+	
+	
 
 }
