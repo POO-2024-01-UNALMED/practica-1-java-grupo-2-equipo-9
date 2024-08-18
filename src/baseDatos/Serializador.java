@@ -1,5 +1,5 @@
-// Autores: Ricardo Fuentes, Valery Fernandez, Juan Luis Sucerquia, Mariana Sanchez, José Forero
 //CLASE SERIALIZADOR QUE PERMITE LA PERSISTENCIA DE DATOS
+// AUTORES: RICARDO FUENTES, VALERY FERNANDEZ, JUAN LUIS SUCERQUIA, MARIANA SANCHEZ, JOSE FORERO
 package baseDatos;
 
 import java.io.File;
@@ -14,12 +14,12 @@ import gestorAplicacion.adminVuelos.Aerolinea;
 
 //SE ENCARGA DE GUARDAR EN ARCHIVOS EL ESTADO DE TODOS LOS OBJETOS DEL MODELO CUANDO EL SISTEMA SE VA A CERRAR
 public class Serializador {
-
-    //File.separator SE USA PARA DIVIDIR LA RUTA A UN ARCHIVO ESPECIFICO SEGUN EL SISTEMA OPERATIVO
-    //LA CLASE File SE USA PARA EL MANEJO DE ARCHIVOS
-    private static File rutaArchivosTemp = new File("src"+File.separator+"basedatos"+File.separator+"temp");
-
-    // SERIALIZAMOS LA LISTA DE AEROLINEAS Y ALOJAMIENTOS
+	
+	//File.separator SE USA PARA DIVIDIR LA RUTA A UN ARCHIVO ESPECIFICO SEGUN EL SISTEMA OPERATIVO
+	//LA CLASE File SE USA PARA EL MANEJO DE ARCHIVOS
+	private static File rutaArchivosTemp = new File("src"+File.separator+"basedatos"+File.separator+"temp");
+	
+	// SERIALIZAMOS LA LISTA DE AEROLINEAS Y ALOJAMIENTOS
 	public static void serializar() {
 		
 		//DECLARAMOS LOS PUNTEROS FileOutputStream y ObjectOutputStream QUE PERMITIRAN LA SERILIZACION DE LOS OBJETOS

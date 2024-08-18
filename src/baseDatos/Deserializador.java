@@ -1,71 +1,66 @@
-// Autores: Ricardo Fuentes, Valery Fernandez, Juan Luis Sucerquia, Mariana Sanchez, José Forero
+//AUTORES: RICARDO FUENTES, VALERY FERNANDEZ, JUAN LUIS SUCERQUIA, MARIANA SANCHEZ, JOSE FORERO
 package baseDatos;
+
 import java.io.*;
 import java.util.ArrayList;
 
-import gestorAplicacion.adminVuelos.Aerolinea;
 import gestorAplicacion.alojamiento.Alojamiento;
+import gestorAplicacion.adminVuelos.*;
 import gestorAplicacion.hangar.*;
 
-
-//PARA CARGAR ARCHIVOS DESDE TEMP Y VER EL ESTADO DE LOS OBJETOS DEL SISTEMA
+//SE ENCARGA DE CARGAR DESDE LOS ARCHIVOS TEMP EL ESTADO DE TODOS LOS OBJETOS GUARDADOS DEL SISTEMA
 public class Deserializador {
-    
-    //LA CLASE File SE USA PARA EL MANEJO DE ARCHIVOS
-    //File.separator SE USA PARA DIVIDIR LA RUTA A UN ARCHIVO ESPECIFICO DADO UN SISTEMA OPERATIVO
-    private static File rutaArchivosTemp = new File("src"+File.separator+"basedatos"+File.separator+"temp");
-
-    //SE DESERIALIZA LA LISTA DE ALOJAMIENTOS Y AEROLINEAS
-    public static void deserializar(){
-
-        //CREAMOS UNA LISTA QUE GUARDE LOS .txt QUE ESTAN EN  rutaArchiosTemp
-        File[] ficheros = rutaArchivosTemp.listFiles();
-
-        //PARA DESERIALIZAR DECLARAMOS LOS PUNTEROS FileinputStream y ObjectInputStream
-        FileInputStream archivo;
-        ObjectInputStream guardado;
-
-        //CICLO QUE RECORRE LOS ARCHIVOS DE LA LISTA ficheros
-        for (File file : ficheros){
-
-            //VERIFICA SI LA RUTA DEL ARCHIVO CONTIENE LA PALABRA Aerolineas(DE DONDE SACAMOS LAS AEROLINEAS JUNTO CON SU INFO)
-            if (file.getAbsolutePath().contains("Aerolineas")){
-                try{
-                    //LEEMOS EL ARCHIVO Aerolineas.txt DE LA LISTA ficheros
-                    archivo = new FileInputStream(file);
-                    //SE PROCESAN LOS DATOS EN EL OBJETO archivo Y SE VINCULAN
-                    guardado = new ObjectInputStream(archivo);
-    
-                    //SE LEEN LOS OBJETOS EN EL ORDEN DE ESCRITURA Y SE CASTEA
-                    //EL APUNTADOR OBJECT A ArrayList<Aerolinea>
-                    //ESTE ArrayList DE AEROLINEAS ES ASIGNADO AL ATRIBUTO DE CLASE DE Aerolinea
-                    Aerolinea.setAerolineas((ArrayList<Aerolinea>) guardado.readObject());
-    
-                }catch(FileNotFoundException e){
-                    e.printStackTrace();
-                }catch(IOException e){
-                    e.printStackTrace();
-                }catch (ClassNotFoundException e){
-                    e.printStackTrace();
-                }
-    
-                //PARA EXTRAER LA LISTA DE ALOJAMIENTOS Y SU INFO VERIFICAMOS QUE LA RUTA TENGA LA PALABRA Alojamientos
-                //DESERIALIZAMOS UNA LISTA DE ALOJAMIENTOS
-            }else if (file.getAbsolutePath().contains("Alojamientos")){
-                try {
-                archivo = new FileInputStream(file);
-                guardado = new ObjectInputStream(archivo);
-                Alojamiento.setAlojamientos((ArrayList<Alojamiento>) guardado.readObject());
-
-                }catch(FileNotFoundException e){
-                    e.printStackTrace();
-                }catch(IOException e){
-                    e.printStackTrace();
-                }catch(ClassNotFoundException e){
-                    e.printStackTrace();
-                }
-            }
-
-        }
-    }
+		
+	//File.separator SE USA PARA DIVIDIR LA RUTA A UN ARCHIVO ESPECIFICO SEGUN EL SISTEMA OPERATIVO
+	//LA CLASE File SE USA PARA EL MANEJO DE ARCHIVOS
+	private static File rutaArchivosTemp = new File("src"+File.separator+"basedatos"+File.separator+"temp");
+	
+	// DESERLIZAMOS LA LISTA DE AEROLINEAS Y ALOJAMIENTOS
+	public static void deserializar() {
+		//CREAMOS UNA LISTA PARA ALMACENAR LOS archivos.txt  QUE ESTAN EN  rutaArchivosTemp
+		File[] ficheros = rutaArchivosTemp.listFiles();
+		//DECLARAMOS LOS PUNTEROS FileInputStream y ObjectInputSream QUE PERMITIRAN LA DESERIALIZACION DE LOS OBJETOS
+		FileInputStream archivo;
+		ObjectInputStream guardado;
+		
+		
+		//RECORREMOS LOS ARCHIVOS QUE ESTAN EN LA LISTA ficheros
+		for (File file : ficheros) {
+			
+			//VERIFICA SI LA RUTA DEL ARCHIVO CONTIENE LA PALABRA Aerolineas(DE DONDE EXTRAEREMOS LA LISTA  DE AEROLINEAS Y TODA SU INFO)
+			if (file.getAbsolutePath().contains("Aerolineas")) {
+				try {
+					//SE LEE EL ARCHIVO Aerolineas.txt DE LA LISTA ficheros
+					archivo = new FileInputStream(file);
+					//PROCESA LOS DATOS CONTENIDOS EN EL OBJETO archivo Y SE VINCULA A EL
+					guardado = new ObjectInputStream(archivo);
+					//SE LEEN LOS OBJETOS EN EL MISMO ORDEN EN QUE HABIAN SIDO ESCRITOS Y 
+					//SE HACE EL CASTEO DEL APUNTADOR OBJECT A ArrayList<Aerolinea>
+					//ESTE ArrayList DE AEROLINEAS SE ASIGNA AL ATRIBUTO DE CLASE Aerolineas DE LA CLASE Aerolinea
+					Aerolinea.setAerolineas((ArrayList<Aerolinea>) guardado.readObject());
+				}catch(FileNotFoundException e) {
+					e.printStackTrace();
+				}catch(IOException e) {
+					e.printStackTrace();
+				}catch(ClassNotFoundException e) {
+					e.printStackTrace();;
+				}
+				
+			//VERIFICA SI LA RUTA DEL ARCHIVO CONTIENE LA PALABRA Alojamientos(DE DONDE EXTRAEREMOS LA LISTA DE ALOJAMIENTOS Y TODA SU INFO)
+			//SE COMPORTA DE IGUAL FORMA QUE EL ANTERIOR, PERO DESERIALIZANDO UNA LISTA DE ALOJAMIENTOS
+			}else if (file.getAbsolutePath().contains("Alojamientos")) {
+				try {
+				archivo = new FileInputStream(file);
+				guardado = new ObjectInputStream(archivo);
+				Alojamiento.setAlojamientos((ArrayList<Alojamiento>) guardado.readObject());
+				}catch(FileNotFoundException e) {
+					e.printStackTrace();
+				}catch(IOException e) {
+					e.printStackTrace();
+				}catch(ClassNotFoundException e) {
+					e.printStackTrace();;
+				}
+			}
+		}
+	}
 }
