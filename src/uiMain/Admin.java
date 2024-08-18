@@ -1,4 +1,5 @@
 // CLASE ADMIN PARA LA INTERACCION DEL USUARIO CON EL SISTEMA
+// Autores: Ricardo Fuentes, Valery Fernandez, Juan Luis Sucerquia, Mariana Sanchez, José Forero
 package uiMain;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import gestorAplicacion.hangar.*;
 import java.lang.Math;
 
 public class Admin {
+
 	static Scanner sc = new Scanner(System.in);
 	static GeneradorDeTablas generadorDeTablas = new TablasConsola();
 	//EL APUNTADOR DEBE SER DEL TIPO DE LA INTERFAZ, POR SI EN ALGUN MOMENTO HACEMOS OTRA CLASE QUE IMPLEMENTE LA INTERFACE
@@ -60,11 +62,20 @@ public class Admin {
 			}
 		} while (opcion != 6);
 	}
+
+	// CASE 1 MAIN: VER TODOS LOS VUELOS DISPONIBLES POR AEROLINEAS
+
+	// MUESTRA UNA TABLA POR CADA AEROLINEA CON LOS VUELOS QUE SE TIENEN
+	// DISPONIBLES, HACIENDO USO DEL generadorDeTablas.
 	static void mostrarVuelosPorAerolineas() {
 		ArrayList<Aerolinea> aerolineasDisponibles = Aerolinea.getAerolineas();
 		generadorDeTablas.mostrarTablaDeVuelosDisponiblesPorAerolineas(aerolineasDisponibles);
 	}
-	
+
+	// CASE 2 MAIN: GENERAR TIQUETE DE COMPRA DE VUELO
+	// EL METODO PERMITE GENERAR UN TIQUETE DE COMPRA DE UN VUELO AL BUSCAR POR DESTINO O POR DESTINO Y FECHA
+	// LUEGO DE ELEGIR UN VUELO SE TOMAN LOS DATOS DEL PASAJERO Y SE ELIGE UNA SILLA EN LA AERONAVE
+	// AL FINAL SE IMPRIME UN RESUMEN DE LA COMPRA
 	static void generarTiquete() {
 		System.out.println("Quieres buscar un vuelo por:");
 		System.out.println("1. Destino");
@@ -119,7 +130,8 @@ public class Admin {
 		while (Aerolinea.BuscarTiquete((int) ID_tiquete) != null) {
 			ID_tiquete = 100 + Math.random() * 900;
 		}
-		
+
+		// SECUENCIA DE PASOS PARA ELEGIR UNA SILLA
 		System.out.println("Que tipo de silla desea comprar?");
 		Silla silla = elegirSilla(vuelo);
 		if (silla == null) {
@@ -128,7 +140,8 @@ public class Admin {
 		}
 		Tiquete tiquete = new Tiquete((int) ID_tiquete, vuelo.getPrecio(), vuelo);
 		tiquete.setSilla(silla);
-		
+
+		// TOMAR DATOS DEL PASAJERO
 		System.out.println("DATOS DEL PASAJERO:");
 		System.out.println("Ingrese el nombre:");
 		String nombre = sc.next();
@@ -138,16 +151,23 @@ public class Admin {
 		String pasaporte = sc.next();
 		System.out.println("Ingrese un e-mail");
 		String correo = sc.next();
-		
+
+		//SE CREA EL OBJETO PASAJERO Y SE LE ASIGNA AL TIQUETE GENERADO EN EL METODO
 		Pasajero pasajero = new Pasajero(pasaporte, nombre, tiquete, edad, correo);
 		tiquete.setPasajero(pasajero);
-		
+
+		// IMPRIME RESUMEN DE LA COMPRA
 		tiquete.asignarPrecio();
 		System.out.println(tiquete);
-		
-	}
-	
 
+	}
+
+	// CASE 3 MAIN: AGREGAR ALOJAMIENTO EN EL DESTINO DEL VUELO COMPRADO
+
+	// EL METODO PERMITE AGREGAR UN ALOJAMIENTO A UN TIQUETE COMPRADO PREVIAMENTE, VERIFICANDO QUE NO SE TENGA UN ALOJAMIENTO COMPRADO
+	// NI SE QUIERA AGREGAR UN ALOJAMIENTO EN UNA LOCACION DISTINTA A LA DEL DESTINO ASOCIADO AL TIQUETE.
+	// AL INGRESAR EL NOMBRE DEL ALOJAMIENTO QUE SE DESEA AGREGAR SE SOLICITA EL NUMERO DE DIAS QUE SE QUIERE QUEDAR
+	// PARA RECALCULAR EL PRECIO DEL TIQUETE, Y AL FINAL MOSTRAR EL RESUMEN DE LA COMPRA
 	static void agregarAlojamiento() {
 		System.out.println("Deseas agregar un alojamiento a tu compra?");
 		System.out.println("Por favor ingresa el ID del tiquete que se genero al comprar su vuelo:");
@@ -188,9 +208,12 @@ public class Admin {
 			}
 		}
 	}
-	
-	
-	
+
+	// CASE 4 MAIN: MODIFICAR TIQUETE COMPRADO
+	// NOS PERMITE MODIFICAR EL ALOJAMIENTO Y LA SILLA DE UN TIQUETE
+	// PRIMERO SOLICITANDO UN ID DE TIQUETE Y VERIFICAR QUE SI EXISTE,
+	// LUEGO CON UN SWITCH LE PRESENTADOS LAS 2 OPCIONES MODIFICAR ALOJAMIENTO O MODIFICAR SILLA
+	// Y SEGUN LO QUE ESCOJA EJECUTAREMOS EL METODO modificarAlojamiento o modificarSilla
 	static void modificarTiquete() {
 		System.out.println("Ingrese el ID del tiquete que desea modificar.");
 		int ID = sc.nextInt();
@@ -218,11 +241,15 @@ public class Admin {
 			}
 		}
 	}
-	
-	
+
+	// METODOS DE MODIFICAR TIQUETE
+
+	// ESTE METODO RECIBE UN TIQUETE AL CUAL SE LE VA A MODIFICAR EL ATRIBUTO SILLA:
+	// LO HACE CAMBIANDO EL ATRIBUTO estaDisponible DE SU SILLA ACTUAL A true Y
+	// ASIGNANDO OTRA SILLA HACIENDO USO DEL METODO elegirSilla	
 	private static void modificarSilla(Tiquete tiquete) {
 
-		System.out.println("A que tipo de silla desea cambiar?");
+		System.out.println("¿A que tipo de silla desea cambiar?");
 		Silla silla = elegirSilla(tiquete.getVuelo());
 		if (silla == null) {
 			System.out.println("Lo sentimos no se encuentran sillas disponibles con esas caracteristicas\n");
@@ -238,8 +265,12 @@ public class Admin {
 		System.out.println(tiquete);
 
 	}
-	
-	
+
+	// ESTE METODO RECIBE UN TIQUETE AL CUAL SE LE VA A MODIFICAR EL ATRIBUTO ALOJAMIENTO (DEBE DE TENER UNO YA ASIGANDO
+	// EN CASO CONTRARIO NO LE PERMITITRA CONTINUAR Y LO REGRESARA AL MENU DE ADMINISTRADOR )
+	// SI SI POSEE UN ALOJAMIENTO, EXTRAERA EL DESTINO DEL VUELO DEL TIQUETE E IMPRIMIRA UNA TABLA CON LOS ALOJAMIENTOS 
+	// QUE POSEEN UNA LOCACION IGUAL A ESTE, LUEGO RECIBE EL NOMBRE DEL ALOJAMIENTO QUE DESEE Y BUSCARA UN ALOJAMIENTO
+	// POR ESE NOMBRE Y EN ESA LOCACION EN CASO DE ENCONTRARLO SE LO ASIGNARA AL ATRIBUTO alojamiento DEL TIQUETE
 	private static int modificarAlojamiento(Tiquete tiquete_solicitado) {
 		if (tiquete_solicitado.getAlojamiento() == null) {
 			System.out.println("Aun no tiene un alojamiento asociado a su tiquete, puede agregar uno en la opcion 3.");
@@ -268,7 +299,10 @@ public class Admin {
 			return dias;
 		}
 	}
-	
+
+	/* CASE 5 MAIN: OPCIONES DE ADMINISTRADOR 
+	 EN ESTE MENU PARA EL ADMINISTRADOR VAN A INTERACTUAR TODAS LAS CLASES PARA PERMITIR
+	 FUNCIONALIDADES ESPECIFICAS PARA CONTROLAR LOS VUELOS Y LOS ALOJAMIENTOS*/
 	static void opcionesAdministrador() {
 
 		int opcion;
@@ -311,7 +345,16 @@ public class Admin {
 			}
 		} while (opcion != 7);
 	}
+
+	// METODOS DE LAS OPCIONES DE ADMINISTRADOR
+
+	// CASE 1: LISTAR PASAJEROS DE UN VUELO
 	
+	/* ESTE METODO NO RECIBRE PARAMETROS DE ENTRADAS Y RETORNO ES VACIO. SU OBJETIVO ES
+	   MOSTRAR LAS LISTAS DE PASAJAEROS ASOCIADOS A UN VUELO. 
+	   PARA ESTO ACCEDEMOS A TRAVES DEL ID DEL VUELO E INVOCAMOS EL METODO BUSCAR VUELO POR ID.
+	   AL FINAL NOS MOSTRARA SI EL VUELO TIENE PASAJEROS ASOCIADOS O NO, Y LA INFORMACION ASOCIADA
+	   AL ID DEL TIQUETE DEL PASAJAERO, SU NOMBRE, SU PASARTE Y SU EMAIL. */
 	private static void listarPasajeros() {
 		ArrayList<Aerolinea> aerolineas = Aerolinea.getAerolineas();
 		generadorDeTablas.mostrarTablaDeVuelosPorAerolineas(aerolineas);
@@ -340,7 +383,12 @@ public class Admin {
 			generadorDeTablas.mostrarTablaDePasajeros(tiquetes);
 		}
 	}
-	
+
+	// CASE 2: AGREGAR NUEVO VUELO A UNA AEROLINEA
+	/* ESTE METODO NO RECIBE PARAMETROS DE ENTRADA PORQUE SE LE PIDE AL USUARIO ADMINISTRADOR INGREGAR 
+	   POR CONSOLA LOS DATOS NECESARIOS PARA AGREGAR UN NUEVO VUELO A UN AEROLINEA.
+	   PARA ESTO SE HARA UNA VERFICACION DE LA EXISTENCIA DE LA AEROLINEA Y POSTERIORMENTE SE RECIBIRAN LOS
+	   PARAMETROS NECESARIOS PARA INSTANCIAR UN VUELO Y AREGARLO AL ARREGLO DE VUELOS QUE LA AEROLINEA*/
 	private static void agregarNuevoVuelo() {
 		ArrayList<Aerolinea> aerolineas = Aerolinea.getAerolineas();
 		System.out.println("AGREGAR NUEVO VUELO \n");
