@@ -34,9 +34,9 @@ public class Vuelo implements Serializable{
 		this.setHora_de_salida(hora_de_salida);
 		this.getAeronave().getAerolinea().agregarVuelo(this);
 	}
-
+	
 	// RECIBE UNA LISTA DE TIQUETES (ARRAYLIST<TIQUETE>) Y UN ID DE UN TIQUETE (INT), Y SE ENCARGA DE RECORRER ESA LISTA DE TIQUETES.
-	// SI ENCUENTRA UNO QUE TENGA EL MISMO ID QUE EL PASADO COMO PAR�METRO, LO RETORNA. SI NO ENCUENTRA NINGUNO RETORNA NULL.
+	// SI ENCUENTRA UNO QUE TENGA EL MISMO ID QUE EL PASADO COMO PARAMETRO, LO RETORNA. SI NO ENCUENTRA NINGUNO RETORNA NULL.
 	public Tiquete buscarTiquetePorID(ArrayList<Tiquete> tiquetes, int ID)
 	{
 		for(int i = 0; i < tiquetes.size(); i++)

@@ -135,11 +135,4 @@ public class TablasConsola implements GeneradorDeTablas {
 		System.out.println();	
 	}
 
-
-
-
-
-	
-	
-
 }

@@ -15,7 +15,7 @@ public class Deserializador {
 	//LA CLASE File SE USA PARA EL MANEJO DE ARCHIVOS
 	private static File rutaArchivosTemp = new File("src"+File.separator+"basedatos"+File.separator+"temp");
 	
-	// DESERLIZAMOS LA LISTA DE AEROLINEAS Y ALOJAMIENTOS
+	// DESERIALIZAMOS LA LISTA DE AEROLINEAS Y ALOJAMIENTOS
 	public static void deserializar() {
 		//CREAMOS UNA LISTA PARA ALMACENAR LOS archivos.txt  QUE ESTAN EN  rutaArchivosTemp
 		File[] ficheros = rutaArchivosTemp.listFiles();
