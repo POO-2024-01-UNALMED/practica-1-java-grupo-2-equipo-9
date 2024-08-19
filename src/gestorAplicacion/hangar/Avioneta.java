@@ -61,6 +61,8 @@ public class Avioneta extends Aeronave {
 	 * para verificar la cantidad de sillas que estan ocupadas y retornaran dicha
 	 * cantidad
 	 */
+	
+	@Override
 	public String Calcular_Sillas_Ocupadas() {
 		int cont = 0;
 		for (Silla i : this.getSILLASECONOMICAS()) {
