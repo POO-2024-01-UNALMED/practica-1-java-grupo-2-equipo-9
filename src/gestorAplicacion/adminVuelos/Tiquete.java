@@ -86,7 +86,7 @@ public class Tiquete implements Serializable {
 		if (this.alojamiento==null) {
 			return  "*************************************\n"+
 					"      Su compra ha sido exitosa\n"+
-					"    Gracias por confiar en nostros\n"+
+					"    Gracias por confiar en nosotros\n"+
 					"*************************************\n"+
 
 					"------------------------------------\n"+

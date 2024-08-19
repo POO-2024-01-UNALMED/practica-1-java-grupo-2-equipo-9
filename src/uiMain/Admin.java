@@ -132,7 +132,7 @@ public class Admin {
 		}
 
 		// SECUENCIA DE PASOS PARA ELEGIR UNA SILLA
-		System.out.println("Que tipo de silla desea comprar?");
+		System.out.println("¿Que tipo de silla desea comprar?");
 		Silla silla = elegirSilla(vuelo);
 		if (silla == null) {
 			System.out.println("Lo sentimos no se encuentran sillas disponibles con esas caracteristicas.\n");
@@ -162,6 +162,7 @@ public class Admin {
 		if (opciones == 1) {
 			System.out.println("Ingrese su e-mail: ");
 			String correo = sc.next();
+			System.out.println("");
 			Pasajero pasajero = new Pasajero(pasaporte, nombre, tiquete, edad, correo);
 			tiquete.setPasajero(pasajero);
 			tiquete.asignarPrecio();
@@ -169,7 +170,6 @@ public class Admin {
 			return;
 			
 		} else if (opciones == 2) {
-			System.out.println("No proporcionó un e-mail.\n");
 			Pasajero pasajero = new Pasajero(pasaporte, nombre, tiquete, edad);
 			tiquete.setPasajero(pasajero);
 			tiquete.asignarPrecio();
@@ -708,7 +708,7 @@ public class Admin {
 			int num_ubicacion;
 			String clase;
 			while(nombre_clase != 1 & nombre_clase!=2) {
-				System.out.println("Porfavor ingrese una opcion valida: ");
+				System.out.println("Por favor ingrese una opcion valida: ");
 				nombre_clase = sc.nextInt();
 			}
 			
