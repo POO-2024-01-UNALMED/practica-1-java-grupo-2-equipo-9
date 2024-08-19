@@ -8,13 +8,19 @@ public class Pasajero implements Serializable {
 	private Tiquete tiquete;
 	private int edad;
 	private String email;
-
+	
+	//CONSTRUCTORES
 	public Pasajero(String pasaporte, String nombre, Tiquete tiquete, int edad, String email) {
 		this.pasaporte = pasaporte;
 		this.nombre = nombre;
 		this.tiquete = tiquete;
 		this.edad = edad;
 		this.email = email;
+		tiquete.setPasajero(this);
+	}
+	
+	public Pasajero(String pasaporte, String nombre, Tiquete tiquete, int edad) {
+		this(pasaporte, nombre, tiquete, edad, "No proporciona");
 		tiquete.setPasajero(this);
 	}
 

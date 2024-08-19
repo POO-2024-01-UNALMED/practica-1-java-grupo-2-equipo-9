@@ -16,10 +16,14 @@ public class Aerolinea implements Serializable{
 	private ArrayList<Vuelo> vuelos = new ArrayList<Vuelo>();
 	private static ArrayList<Aerolinea> aerolineas = new ArrayList<Aerolinea>();
 
-	//CONSTRUCTOR
+	//CONSTRUCTORES
 	public Aerolinea(String nombre) {
 		this.nombre = nombre;
 		aerolineas.add(this);
+	}
+
+	public Aerolinea() {
+		this("Airways" + ((int) (100 + Math.random() * 400)));
 	}
 
 	@Override

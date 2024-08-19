@@ -30,7 +30,7 @@ public class Admin {
 			System.out.println("----- AEROPUERTO EL SOL -----");
 			System.out.println("¿Que operacion desea realizar?");
 			System.out.println("1. Ver todos los vuelos disponibles por Aerolinea");
-			System.out.println("2. Comprar tiquete para un vuelo por destino y fecha");
+			System.out.println("2. Comprar tiquete para un vuelo");
 			System.out.println("3. Agregar alojamiento en el destino del vuelo");
 			System.out.println("4. Modificar tiquete comprado");
 			System.out.println("5. Ver opciones de administrador");
@@ -77,27 +77,27 @@ public class Admin {
 	// LUEGO DE ELEGIR UN VUELO SE TOMAN LOS DATOS DEL PASAJERO Y SE ELIGE UNA SILLA EN LA AERONAVE
 	// AL FINAL SE IMPRIME UN RESUMEN DE LA COMPRA
 	static void generarTiquete() {
-		System.out.println("Quieres buscar un vuelo por:");
+		System.out.println("Quieres buscar un vuelo por: ");
 		System.out.println("1. Destino");
 		System.out.println("2. Destino y fecha");
 		System.out.println("3. Regresar");
 		int opcion = sc.nextInt();
 		while (opcion != 1 & opcion != 2 & opcion != 3) {
-			System.out.println("Por favor ingresa una opcion valida");
+			System.out.println("Por favor ingresa una opcion valida: ");
 			opcion = sc.nextInt();
 		}
 
 		if (opcion == 1) {
-			System.out.println("Por favor ingrese un destino:");
+			System.out.println("Por favor ingrese un destino: ");
 			String destino_1 = sc.next();
 			boolean hayVuelos = consultarVuelosPorDestino(destino_1);
 			if (!hayVuelos) {
 				return;
 			}
 		} else if (opcion == 2) {
-			System.out.println("Por favor ingrese un destino");
+			System.out.println("Por favor ingrese un destino: ");
 			String destino_2 = sc.next();
-			System.out.println("Por favor ingrese una fecha (dd-mm-aaaa):");
+			System.out.println("Por favor ingrese una fecha (dd-mm-aaaa): ");
 			String fecha_2 = sc.next();
 			boolean hayVuelos = consultarVuelosPorDestinoYFecha(destino_2, fecha_2);
 			if (!hayVuelos) {
@@ -107,21 +107,21 @@ public class Admin {
 			return;
 		}
 
-		System.out.println("Por favor ingrese el nombre de la aerolinea con la que desea viajar");
+		System.out.println("Por favor ingrese el nombre de la aerolinea con la que desea viajar: ");
 		String nombre_aerolinea = sc.next();
 		Aerolinea aerolinea = Aerolinea.buscarAerolineaPorNombre(nombre_aerolinea); 
 
 		while (aerolinea == null) {
-			System.out.println("Por favor ingrese un nombre valido");
+			System.out.println("Por favor ingrese un nombre valido: ");
 			nombre_aerolinea = sc.next();
 			aerolinea = Aerolinea.buscarAerolineaPorNombre(nombre_aerolinea);
 		}
 
-		System.out.println("Por favor ingrese el ID del vuelo que desea comprar");
+		System.out.println("Por favor ingrese el ID del vuelo que desea comprar: ");
 		int ID = sc.nextInt();
 		Vuelo vuelo = aerolinea.buscarVueloPorID(aerolinea.getVuelos(), ID); 
 		while (vuelo == null) {
-			System.out.println("Por favor ingrese un ID valido");
+			System.out.println("Por favor ingrese un ID valido: ");
 			ID = sc.nextInt();
 			vuelo = aerolinea.buscarVueloPorID(aerolinea.getVuelos(), ID);
 		}
@@ -135,7 +135,7 @@ public class Admin {
 		System.out.println("Que tipo de silla desea comprar?");
 		Silla silla = elegirSilla(vuelo);
 		if (silla == null) {
-			System.out.println("Lo sentimos no se encuentran sillas disponibles con esas caracteristicas\n");
+			System.out.println("Lo sentimos no se encuentran sillas disponibles con esas caracteristicas.\n");
 			return;
 		}
 		Tiquete tiquete = new Tiquete((int) ID_tiquete, vuelo.getPrecio(), vuelo);
@@ -143,24 +143,44 @@ public class Admin {
 
 		// TOMAR DATOS DEL PASAJERO
 		System.out.println("DATOS DEL PASAJERO:");
-		System.out.println("Ingrese el nombre:");
+		System.out.println("Ingrese el nombre: ");
 		String nombre = sc.next();
-		System.out.println("Ingrese su edad:");
+		System.out.println("Ingrese su edad: ");
 		int edad = sc.nextInt();
-		System.out.println("Ingrese el numero de su pasaporte:");
+		System.out.println("Ingrese el numero de su pasaporte: ");
 		String pasaporte = sc.next();
-		System.out.println("Ingrese un e-mail");
-		String correo = sc.next();
+		System.out.println("¿Desea agregar su e-mail?");
+		System.out.println("1: Si");
+		System.out.println("2: No");
+		int opciones = sc.nextInt();
+		
+		while (opciones != 1 & opciones != 2) {
+			System.out.println("Por favor ingresa una opcion valida: ");
+			opciones = sc.nextInt();
+		}
 
-		//SE CREA EL OBJETO PASAJERO Y SE LE ASIGNA AL TIQUETE GENERADO EN EL METODO
-		Pasajero pasajero = new Pasajero(pasaporte, nombre, tiquete, edad, correo);
-		tiquete.setPasajero(pasajero);
+		if (opciones == 1) {
+			System.out.println("Ingrese su e-mail: ");
+			String correo = sc.next();
+			Pasajero pasajero = new Pasajero(pasaporte, nombre, tiquete, edad, correo);
+			tiquete.setPasajero(pasajero);
+			tiquete.asignarPrecio();
+			System.out.println(tiquete);
+			return;
+			
+		} else if (opciones == 2) {
+			System.out.println("No proporcionó un e-mail.\n");
+			Pasajero pasajero = new Pasajero(pasaporte, nombre, tiquete, edad);
+			tiquete.setPasajero(pasajero);
+			tiquete.asignarPrecio();
+			System.out.println(tiquete);
+			return;
+			
+		} else {
+			return;
+		}
 
-		// IMPRIME RESUMEN DE LA COMPRA
-		tiquete.asignarPrecio();
-		System.out.println(tiquete);
-
-	}
+}
 
 	// CASE 3 MAIN: AGREGAR ALOJAMIENTO EN EL DESTINO DEL VUELO COMPRADO
 
@@ -169,13 +189,13 @@ public class Admin {
 	// AL INGRESAR EL NOMBRE DEL ALOJAMIENTO QUE SE DESEA AGREGAR SE SOLICITA EL NUMERO DE DIAS QUE SE QUIERE QUEDAR
 	// PARA RECALCULAR EL PRECIO DEL TIQUETE, Y AL FINAL MOSTRAR EL RESUMEN DE LA COMPRA
 	static void agregarAlojamiento() {
-		System.out.println("Deseas agregar un alojamiento a tu compra?");
-		System.out.println("Por favor ingresa el ID del tiquete que se genero al comprar su vuelo:");
+		System.out.println("¿Deseas agregar un alojamiento a tu compra?");
+		System.out.println("Por favor ingresa el ID del tiquete que se genero al comprar su vuelo: ");
 		int tiqueteID = sc.nextInt();
 		Tiquete tiquete_solicitado = Aerolinea.BuscarTiquete(tiqueteID);
 		
 		if (tiquete_solicitado == null) { 
-			System.out.println("Lo sentimos, no tenemos un tiquete identificado con ese ID");
+			System.out.println("Lo sentimos, no tenemos un tiquete identificado con ese ID.");
 			System.out.println();
 		}else if(tiquete_solicitado.getAlojamiento() != null) {
 			System.out.println("El tiquete ya posee un alojamiento, si quiere cambiarlo hagalo desde la opcion 4.\n");
@@ -186,17 +206,17 @@ public class Admin {
 			if (!hayAlojamientos) { 
 				return;
 			}
-			System.out.println("Por favor ingresa el nombre del alojamiento que desea anadir a su compra:");
+			System.out.println("Por favor ingresa el nombre del alojamiento que desea anadir a su compra: ");
 			String alojamiento = sc.next();
 			Alojamiento alojamiento_solicitado = Alojamiento.buscarAlojamientoPorNombre(alojamiento);
 			if (alojamiento_solicitado == null) { 
-				System.out.println("Lo sentimos, no tenemos un alojamiento con ese nombre");
+				System.out.println("Lo sentimos, no tenemos un alojamiento con ese nombre.");
 				System.out.println();
 			}else if(!alojamiento_solicitado.getLocacion().equals(destino) ){ 
-				System.out.println("Lo sentimos, no tenemos un alojamiento con ese nombre en esa locacion\n");
+				System.out.println("Lo sentimos, no tenemos un alojamiento con ese nombre en esa locacion.\n");
 				return; }
 			else { 
-				System.out.println("Cuantos dias desea quedarse en el alojamiento?");
+				System.out.println("¿Cuantos dias desea quedarse en el alojamiento?");
 				int num_dias = sc.nextInt();
 				tiquete_solicitado.setAlojamiento(alojamiento_solicitado);
 				tiquete_solicitado.asignarPrecio(num_dias);
@@ -215,13 +235,13 @@ public class Admin {
 	// LUEGO CON UN SWITCH LE PRESENTADOS LAS 2 OPCIONES MODIFICAR ALOJAMIENTO O MODIFICAR SILLA
 	// Y SEGUN LO QUE ESCOJA EJECUTAREMOS EL METODO modificarAlojamiento o modificarSilla
 	static void modificarTiquete() {
-		System.out.println("Ingrese el ID del tiquete que desea modificar.");
+		System.out.println("Ingrese el ID del tiquete que desea modificar: ");
 		int ID = sc.nextInt();
 		Tiquete tiquete = Aerolinea.BuscarTiquete(ID);
 		if (tiquete == null) {
-			System.out.println("El ID ingresado no se encuentra\n");
+			System.out.println("El ID ingresado no se encuentra.\n");
 		} else {
-			System.out.println("Que aspectos de su tiquete desea modificar?");
+			System.out.println("¿Que aspectos de su tiquete desea modificar?");
 			System.out.println("1: Modificar alojamiento");
 			System.out.println("2: Modificar Silla");
 
@@ -279,7 +299,7 @@ public class Admin {
 		}
 		String destino = tiquete_solicitado.getVuelo().getDestino();
 		mostrarAlojamientosPorUbicacion(destino);
-		System.out.println("Por favor ingresa el nombre del alojamiento al que desea cambiar");
+		System.out.println("Por favor ingresa el nombre del alojamiento al que desea cambiar: ");
 		String alojamiento = sc.next();
 		Alojamiento alojamiento_solicitado = Alojamiento.buscarAlojamientoPorNombre(alojamiento);
 		if (alojamiento_solicitado == null) {
@@ -290,7 +310,7 @@ public class Admin {
 			return -1;
 			
 		}else {
-			System.out.println("Por favor ingrese el numero de dias que se va a quedar en el alojamiento");
+			System.out.println("Por favor ingrese el numero de dias que se va a quedar en el alojamiento: ");
 			int dias = sc.nextInt();
 			tiquete_solicitado.setAlojamiento(alojamiento_solicitado);
 			System.out.println("Perfecto! su alojamiento ha sido modificado a " + alojamiento_solicitado.getNombre()
@@ -378,7 +398,7 @@ public class Admin {
 		System.out.println("LISTA DE PASAJEROS PARA EL VUELO " + IDBusqueda);
 
 		if (tiquetes.size() == 0) {
-			System.out.println("El vuelo aun no tiene pasajeros asociados \n");
+			System.out.println("El vuelo aun no tiene pasajeros asociados.\n");
 		} else {
 			generadorDeTablas.mostrarTablaDePasajeros(tiquetes);
 		}
@@ -404,7 +424,7 @@ public class Admin {
 
 		while (existe == false) {
 			System.out.println("\nESA AEROLINEA NO EXISTE");
-			System.out.println("Ingrese un nombre del listado anterior\n");
+			System.out.println("Ingrese un nombre del listado anterior:\n");
 			String nombreAerolinean = sc.next();
 			existe = list.contains(nombreAerolinean);
 		}
@@ -527,19 +547,19 @@ public class Admin {
 	// PERMITE AGREGAR UN ALOJAMIENTO A LA LISTA DE ALOJAMIENTOS DISPONIBLES, ESTO DESDE SU CONSTRUCTOR
 		public static void nuevoAlojamiento()
 	{
-		System.out.println("Ingrese el nombre del alojamiento que desea agregar a nuestra lista:");
+		System.out.println("Ingrese el nombre del alojamiento que desea agregar a nuestra lista: ");
 		String nombre = sc.next();
 		System.out.println();
 		
-		System.out.println("Ingrese la locacion:");
+		System.out.println("Ingrese la locacion: ");
 		String locacion = sc.next();
 		System.out.println();
 		
-		System.out.println("Ingrese el precio por dia:");
+		System.out.println("Ingrese el precio por dia: ");
 		long precio = sc.nextLong();
 		System.out.println();
 		
-		System.out.println("Ingrese el numero de estrellas (1-5):");
+		System.out.println("Ingrese el numero de estrellas (1-5): ");
 		int estrellas = sc.nextInt();
 		System.out.println();
 		
@@ -552,10 +572,10 @@ public class Admin {
 	// ALOJAMIENTO QUE SE DESEA RETIRAR DE LA LISTA Y ELIMINARLO DE LA LISTA DE ALOJAMIENTOS.	
 	public static void retirarAlojamiento()
 	{
-		System.out.println("Estos son los alojamientos que tenemos asociados:");
+		System.out.println("Estos son los alojamientos que tenemos asociados: ");
 		generadorDeTablas.mostrarTablaDeAlojamientos(Alojamiento.getAlojamientos());
 	
-		System.out.println("Ingrese el nombre del alojamiento que desea retirar de nuestra lista:");
+		System.out.println("Ingrese el nombre del alojamiento que desea retirar de nuestra lista: ");
 		String nombre = sc.next();
 		
 		if (Alojamiento.buscarAlojamientoPorNombre(nombre) != null)
@@ -598,7 +618,7 @@ public class Admin {
 	// UN VUELO EN ALGUNA AEROLINEA QUE TUVIERA ASOCIADO ESTE DESTINO RETORNA LA VARIABLE boolean HAYVUELOS CON EL VALOR true, DE LO CONTRARIO RETORNA false.
 	static boolean consultarVuelosPorDestino(String destino) 
 	{
-		System.out.println("Estos son los vuelos disponibles hacia " + destino + " por nuestras aerolineas:" );
+		System.out.println("Estos son los vuelos disponibles hacia " + destino + " por nuestras aerolineas:");
 		System.out.println();
 		boolean hayVuelos = false;
 		
@@ -615,7 +635,7 @@ public class Admin {
 		}
 		if (hayVuelos == false) 
 		{
-		System.out.println("Lo sentimos, no tenemos vuelos disponibles para ese destino");
+		System.out.println("Lo sentimos, no tenemos vuelos disponibles para ese destino.");
 		System.out.println();
 		}
 		return hayVuelos;
@@ -630,7 +650,7 @@ public class Admin {
 	static boolean consultarVuelosPorDestinoYFecha(String destino, String fecha) 
 	{
 		System.out.println();
-		System.out.println("Estos son los vuelos disponibles hacia " + destino + " en la fecha " + fecha + " por nuestras aerolineas:" );
+		System.out.println("Estos son los vuelos disponibles hacia " + destino + " en la fecha " + fecha + " por nuestras aerolineas:");
 		System.out.println();
 		boolean hayVuelos = false;
 		
@@ -649,7 +669,7 @@ public class Admin {
 			}
 		}
 		if (hayVuelos == false) {
-			System.out.println("Lo sentimos, no tenemos vuelos disponibles para ese destino y fecha especificos");
+			System.out.println("Lo sentimos, no tenemos vuelos disponibles para ese destino y fecha especificos.");
 			System.out.println();
 		}
 		return hayVuelos;
@@ -662,14 +682,14 @@ public class Admin {
 	// ALOJAMIENTO QUE TUVIERA ESA UBICACION, RETORNA LA VARIABLE boolean HAYVUELOS CON EL VALOR true, DE LO CONTRARIO RETORNA false.
 	static boolean mostrarAlojamientosPorUbicacion(String ubicacion) 
 	{
-		System.out.println("Estos son los alojamientos disponibles en " + ubicacion + ":" );
+		System.out.println("Estos son los alojamientos disponibles en " + ubicacion + ":");
 		boolean hayAlojamientos = false;
 		ArrayList<Alojamiento> alojamientosDisponibles = Alojamiento.buscarAlojamientoPorUbicacion(ubicacion);
 		if (alojamientosDisponibles.size() != 0) {
 			hayAlojamientos = true;
 			generadorDeTablas.mostrarTablaDeAlojamientos(alojamientosDisponibles);		
 		}else {
-			System.out.println("Lo sentimos, no tenemos alojamientos disponibles para ese destino");
+			System.out.println("Lo sentimos, no tenemos alojamientos disponibles para ese destino.");
 			System.out.println();
 		}
 		return hayAlojamientos;
@@ -688,11 +708,11 @@ public class Admin {
 			int num_ubicacion;
 			String clase;
 			while(nombre_clase != 1 & nombre_clase!=2) {
-				System.out.println("Porfavor ingrese una opcion valida");
+				System.out.println("Porfavor ingrese una opcion valida: ");
 				nombre_clase = sc.nextInt();
 			}
 			
-			System.out.println("Cual de las siguientes ubicaciones prefiere?");
+			System.out.println("¿Cual de las siguientes ubicaciones prefiere?");
 			System.out.println("1: Pasillo");
 			System.out.println("2: Ventana");
 			
@@ -701,14 +721,14 @@ public class Admin {
 				System.out.println("3: Central");
 				num_ubicacion  = sc.nextInt();
 				while(num_ubicacion!=1 & num_ubicacion!=2 & num_ubicacion!=3) {
-					System.out.println("Porfavor ingrese una opcion valida");
+					System.out.println("Por favor ingrese una opcion valida: ");
 					num_ubicacion = sc.nextInt();
 				}
 			}
 			else {clase = "EJECUTIVA";
 				num_ubicacion  = sc.nextInt();
 				while(num_ubicacion!=1 & num_ubicacion!=2) {
-					System.out.println("Porfavor ingrese una opcion valida");
+					System.out.println("Por favor ingrese una opcion valida: ");
 					num_ubicacion = sc.nextInt();
 				}
 			}
