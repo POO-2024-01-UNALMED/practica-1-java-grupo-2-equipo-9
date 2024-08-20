@@ -23,7 +23,7 @@ public class Admin {
 	public static void main(String[] args) {
 
 		Deserializador.deserializar();
-				
+		
 //		MENU PRINCIPAL
 		int opcion;
 		do {
