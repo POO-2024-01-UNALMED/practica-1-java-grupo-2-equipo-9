@@ -413,7 +413,7 @@ public class Admin {
 		ArrayList<Aerolinea> aerolineas = Aerolinea.getAerolineas();
 		System.out.println("AGREGAR NUEVO VUELO \n");
 		generadorDeTablas.mostrarTablaDeAerolineas(aerolineas);
-		System.out.println("Ingrese el nombre de la aerolinea para agregar vuelo\n");
+		System.out.println("Ingrese el nombre de la aerolinea para agregar vuelo:\n");
 		String nombreAerolinea = sc.next();
 
 		ArrayList<String> list = new ArrayList<>();
@@ -466,7 +466,7 @@ public class Admin {
 		String horaSalida = sc.next();
 		System.out.println();
 
-		System.out.println("Que tipo de aeronave es?");
+		System.out.println("¿Que tipo de aeronave es?");
 		System.out.println("Ingrese 1 para avion" + "\n" + "Ingrese 2 para avioneta");
 		int aeronave = sc.nextInt();
 
